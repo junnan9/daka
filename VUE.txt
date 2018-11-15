@@ -1,0 +1,12 @@
+数组去重
+let aa=[1,2,2,3]
+function uniq(array){
+    var temp=[];
+    for(var i=0;i<array.length;i++){
+        if(temp.array.indexOf(array[i])==-1){
+            temp.push(array[i]);
+        }
+    },
+    return temp
+}
+console.log(uniq(aa))
