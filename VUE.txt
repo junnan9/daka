@@ -10,3 +10,7 @@ function uniq(array){
     return temp
 }
 console.log(uniq(aa))
+
+
+typeOf返回的六种类型
+string,number,bull,undefined,function,object
