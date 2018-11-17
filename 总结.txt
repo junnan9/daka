@@ -1,3 +1,4 @@
+
 数组去重
 let aa=[1,2,2,3]
 function uniq(array){
@@ -14,3 +15,7 @@ console.log(uniq(aa))
 
 typeOf返回的六种类型
 string,number,bull,undefined,function,object
+
+
+方法重载
+为实现统一功能，统一方法处理不同类型的数据。重载类型有参数个数、类型、顺序上的不同。
