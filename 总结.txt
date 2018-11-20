@@ -36,3 +36,22 @@ W3C标准及规范
 6、属性值必须用双引号或单引号
 7、嵌套需合理
 8、特殊符号编码表示
+
+怎样优化JS代码？
+1、用array[]代替 变量+=
+2、使用
+3、减少重绘
+<div id="demo" ></div>
+<input type="button" value="高效优化JS" onclick="func2" />
+var str=<div>123</div>
+function func2(){
+    var obj=document.getElementById("demo");
+    var start=new Date().getTime();
+    var arr=[];
+    for(var i=0;i<100;i++){
+        arr[i]=str+i;
+    }
+    obj.innerHTML=arr.join(" ");
+    var end=new Date().getTime();
+    alert("用时"+(end-start)+"毫秒");
+}
