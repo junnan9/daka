@@ -57,4 +57,5 @@ Ajax的优缺点?
 3、破坏了程序的异常机制
 4、对搜索引擎支持弱
 
-
+jQuery中的this和$(this)的区别？
+this指的是DOM对象，$(this)中的this指的是jQuery对象。
