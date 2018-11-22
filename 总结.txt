@@ -66,3 +66,6 @@ v-show是通过对DOM元素的display属性控制显隐。适用于频繁切换�
 
 VUE的生命周期？
 beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestory、destory
+
+Sql语句分页查询
+SELECT * FROM userdetail LIMIT (pageNow-1)*pageSize,pageSize;
