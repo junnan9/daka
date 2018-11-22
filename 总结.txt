@@ -69,3 +69,6 @@ beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、before
 
 Sql语句分页查询
 SELECT * FROM userdetail LIMIT (pageNow-1)*pageSize,pageSize;
+
+toString和string的区别？
+toString不能处理undefined和null,而string可以转换以上两个变量。
