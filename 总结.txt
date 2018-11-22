@@ -63,3 +63,6 @@ this指的是DOM对象，$(this)中的this指的是jQuery对象。
 v-if和v-show的区别？
 v-if是通过动态的对DOM树添加或删除DOM元素，来达到显示隐藏。适用于运营环境比较稳定的场所
 v-show是通过对DOM元素的display属性控制显隐。适用于频繁切换的运营环境
+
+VUE的生命周期？
+beforeCreate、created、beforeMount、mounted、beforeUpdate、updated、beforeDestory、destory
