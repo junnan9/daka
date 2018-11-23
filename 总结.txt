@@ -77,3 +77,16 @@ toString不能处理undefined和null,而string可以转换以上两个变量。
 1、首字母大写
 2、内部用this，指将要生成的实例
 3、new生成实例对象
+
+如何解决跨域问题？
+jsonp应用面窄，步骤繁琐，所以用jQuery实现跨域
+客户端：
+$.ajax({
+    dataType:jsonp,
+    success:function(res){...}
+})
+服务端：
+router.get("/",(req,res)=>{
+    var fun =req.query.callback;
+    var data="数据";
+})
