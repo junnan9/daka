@@ -72,3 +72,8 @@ SELECT * FROM userdetail LIMIT (pageNow-1)*pageSize,pageSize;
 
 toString和string的区别？
 toString不能处理undefined和null,而string可以转换以上两个变量。
+
+构造函数的特点？
+1、首字母大写
+2、内部用this，指将要生成的实例
+3、new生成实例对象
