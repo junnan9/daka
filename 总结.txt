@@ -90,7 +90,3 @@ router.get("/",(req,res)=>{
     var fun =req.query.callback;
     var data="数据";
 })
-
-JS错误类型？
-SyntaxError、ReferenceError、TypeError
-
