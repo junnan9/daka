@@ -90,3 +90,11 @@ router.get("/",(req,res)=>{
     var fun =req.query.callback;
     var data="数据";
 })
+
+JS的错误类型？
+1、SynataxError解析代码时发生语法错误
+2、ReferenceError引用了一个不存在的变量
+3、TypeError变量或参数不是预期类型
+4、URLError与url相关函数不正确
+5、RangeError超出有效范围
+
