@@ -130,3 +130,16 @@ JS代码优化？
 4、归并排序
 5、基数排序
 外部排序...
+
+移动端适配方案？
+方案一
+<meta name="viewport" content="width=device-width,maximum-scable=1,minimum-scable=1,userscable=no,initial=1"/>
+<script>
+    document.documentElement.style.fontSize=document.documentElement.device-width/7.5+'px';
+</script>
+div{
+    width:5rem;height:2rem
+}
+@media screen (max-width:321px){.m-navlist{font-size:15px}}
+@media screen (min-width:321px) and (max-width:400px){.m-navlist(font-size:16px)}
+@media screen (min-width:400px){.m-navlist{font-size:18px}}
