@@ -143,3 +143,15 @@ div{
 @media screen (max-width:321px){.m-navlist{font-size:15px}}
 @media screen (min-width:321px) and (max-width:400px){.m-navlist(font-size:16px)}
 @media screen (min-width:400px){.m-navlist{font-size:18px}}
+
+如何在VUE项目中引入elementUI组件？
+1、初始化项目
+vue init webpack vue-elementui
+npm run dev
+2、安装elementUI
+npm i element-ui -S
+3、引入elementUI
+在main.js中引入elementUI
+4、测试
+新建header.vue文件，复制一段elementUI的代码
+在App.vue中引入header.vue
