@@ -155,3 +155,4 @@ npm i element-ui -S
 4、测试
 新建header.vue文件，复制一段elementUI的代码
 在App.vue中引入header.vue
+
