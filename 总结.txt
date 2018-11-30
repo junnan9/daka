@@ -167,3 +167,5 @@ function test(){
 var demo=test();
 demo();
 demo();
+
+微信小程序开发组件和API，组件中的搜索图标是<icon type="search" size="20" color="#ccc"/>
