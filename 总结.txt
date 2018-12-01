@@ -169,3 +169,5 @@ demo();
 demo();
 
 微信小程序开发组件和API，组件中的搜索图标是<icon type="search" size="20" color="#ccc"/>
+
+微信小程序image引用路径不对时，不报错。
