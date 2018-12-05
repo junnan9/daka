@@ -206,3 +206,16 @@ app({
 })
 
 微信小程序一个class可以有两个类名，一个大家公用样式名一个自己用的样式
+
+当需要一行中两头对齐显示CSS可以用下面代码解决，
+.detail .float{
+  overflow: hidden;
+}
+.float>view:nth-of-type(2n+1){
+  float: left;
+}
+.float>view:nth-of-type(2n){
+  float: right;
+}
+或
+justify-content: flex-start|flex-end|center|space-between|space-around|initial|inherit;
