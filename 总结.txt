@@ -219,3 +219,4 @@ app({
 }
 或
 justify-content: flex-start|flex-end|center|space-between|space-around|initial|inherit;
+图片加一个model="aspectFill"
