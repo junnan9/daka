@@ -223,3 +223,5 @@ justify-content: flex-start|flex-end|center|space-between|space-around|initial|i
 CSS中text需要单独调整，如购物车加、减按钮调试时需要分开，写的时候可以将CSS类名放在一起。
 
 浮动之后给“满oo减oo”与“youjiantou”图片加右浮动之后，图片顺序会调换。
+
+CSS中写样式时可以共用，但是注意全局污染。
