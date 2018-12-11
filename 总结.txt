@@ -254,3 +254,6 @@ CSS中写样式时可以共用，但是注意全局污染。
   },
 
   js中找不到错误时，多用console.log('变量名')，看到底哪个变量打印不出来
+
+  小程序中bindtap和catchtap的区别？
+  bindtap不能阻止冒泡，而catchtap可以阻止冒泡。
