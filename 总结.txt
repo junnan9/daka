@@ -257,3 +257,245 @@ CSS中写样式时可以共用，但是注意全局污染。
 
   小程序中bindtap和catchtap的区别？
   bindtap不能阻止冒泡，而catchtap可以阻止冒泡。
+
+  小程序上传身份证图片的实现方法
+js页面                               《《《《《《
+Page({
+  data: {
+    tempFilePaths: '',              //身份证上传路径
+    hidden: true, //true
+    buthidden: false, //false       
+    sourceType: ['album', 'camera']
+  },
+
+  onLoad: function (options) {
+    try {
+      var res = wx.getSystemInfoSync()
+      var platform = res.platform
+      if (platform == 'ios') {
+        util.msg("警告", "IOS系统暂不支持拍照，请从相册选择照片")
+        this.setData({
+          sourceType: ['album']
+        })
+      }
+      console.log(platform)
+    } catch (e) { }
+  },
+  frontimage: function () {
+    var that = this;
+    var Type = that.data.sourceType
+    wx.chooseImage({
+      count: 1, // 默认9 
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: Type, // 可以指定来源是相册还是相机，默认二者都有 
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
+        that.setData({
+          FilePaths: res.tempFilePaths
+        })
+      }
+    })
+  },
+  reciteimage: function () {
+    var that = this;
+    var Type = that.data.sourceType
+    wx.chooseImage({
+      count: 1, // 默认9 
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有 
+      sourceType: Type, // 可以指定来源是相册还是相机，默认二者都有 
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片 
+        that.setData({
+          recitePaths: res.tempFilePaths
+        })
+      }
+    })
+  },
+})
+
+
+wxml页面
+<loading hidden="{{hidden}}">
+  上传中...
+</loading>
+<view class="merch_img">
+  <view class="indentityCard">
+    <view class="identityCard_front" bindtap="frontimage">
+      <image src="../../pages/images/merch_att_add/tubiao.png" class="images"></image>
+      <view class="imgs">身份证正面</view>
+      <image src="{{FilePaths}}" mode="aspecFill" class="paths" />
+    </view>
+    <view class="identityCard_recite" bindtap="reciteimage">
+      <image src="../../pages/images/merch_att_add/tubiao.png" class="images"></image>
+      <view class="imgs">身份证背面</view>
+      <image src="{{recitePaths}}" mode="aspecFill" class="paths" />
+    </view>
+  </view>
+  <button class="next_step" type="primary" disabled="{{buthidden}}" bindtap="primary">下一步</button>
+</view>
+
+//////////////////////////////////////////////////////////////////////////////////
+购物车全选与反选
+<view wx:for="{{carts}}" class="carts-item" data-title="{{item.title}}" data-url="{{item.url}}" bindtap="bindViewTap">
+<view class="my-wrap"><view class="my-tlt">
+{{item.title}} 
+</view>
+<view class="my-list bordernone">
+<icon wx:if="{{item.selected}}" type="success_circle" size="20" bindtap="bindCheckbox" data-index="{{index}}" class="my-check"/>
+<icon wx:else type="circle" size="20" bindtap="bindCheckbox" data-index="{{index}}" class="my-check"/>
+<image src="{{item.image}}" class="my-pic" mode="aspectFill"></image>
+<view class="my-left">
+<view class="my-title"> K金砖玉石电视背景墙砖</view>
+<text class="my-txt">尺寸：800X800</text>
+<view class="my-bnt">
+
+<!-- 减号 -->
+<text class="{{minusStatuses[index]}} bnt" data-index="{{index}}" bindtap="bindMinus">-</text>
+<!-- 数值 -->
+<input type="number" bindchange="bindManual" class="int" value="{{item.num}}" />
+<!-- 加号 -->
+<text class="normal bnt" data-index="{{index}}" bindtap="bindPlus">+</text>]
+
+
+</view>
+</view>
+<view class="my-right">
+<icon class="iconfont del"/>
+<text class="gay">￥{{item.price}}</text>
+</view>
+</view>
+</view>
+
+<view class="float">
+
+<!-- 全选 -->
+<view bindtap="bindSelectAll" class="my-sel" >
+<icon wx:if="{{selectedAllStatus}}" type="success_circle" size="20" class="l-mycheck"/>
+<icon wx:else type="circle" size="20" class="l-mycheck"/>
+<text>全选</text>
+</view>
+<view class="my-rightbox">
+<view class="my-count" data='{{sep}}'>
+
+<!-- 统计 -->
+合计（不含运费）：￥<text>{{count}}</text>
+</view>
+<view class="my-bnts" bindtap="setPayment" >
+结算（<text>{{number}}</text>）
+</view>
+</view>
+</view>
+
+这里css自己去写,这里不做多介绍，只做效果：
+
+首先：先定义js
+
+在page.data里面
+
+count:0,
+number:0,
+minusStatuses: ['disabled', 'disabled', 'normal', 'normal', 'disabled'],
+carts: [
+{title:'自营商城',image:'../images/my.png',num:'1',price:'198.0',selected:false},
+{title:'自营商城',image:'../images/my.png',num:'1',price:'100.0',selected:false},
+{title:'自营商城',image:'../images/my.png',num:'3',price:'15.0',selected:false},
+{title:'自营商城',image:'../images/my.png',num:'2',price:'15.2',selected:false},
+{title:'自营商城',image:'../images/my.png',num:'1',price:'122.0',selected:true},
+]，
+
+carts这个你可以通过url自己传参，我这里自己写点数据，
+
+js代码bindMinus、bindPlus分别改造为如下：
+
+bindMinus: function(e) {
+var index = parseInt(e.currentTarget.dataset.index);
+
+var num = this.data.carts[index].num;
+
+if (num > 0) {
+num --;
+}
+var minusStatus = num <= 0 ? 'disabled' : 'normal';
+var carts = this.data.carts;
+carts[index].num = num;
+
+var minusStatuses = this.data.minusStatuses;
+minusStatuses[index] = minusStatus;
+
+this.setData({
+carts: carts,
+minusStatuses: minusStatuses
+});
+},
+bindPlus: function(e) {
+var index = parseInt(e.currentTarget.dataset.index);
+var num = this.data.carts[index].num; 
+num ++;
+var minusStatus = num <= 1 ? 'disabled' : 'normal';
+var carts = this.data.carts;
+carts[index].num = num;
+
+var minusStatuses = this.data.minusStatuses;
+minusStatuses[index] = minusStatus;
+
+this.setData({
+carts: carts,
+minusStatuses: minusStatuses
+});
+}, 
+
+单选：这里需要判断一下已选状态，一般购物车勾选状态是记录在网络的。index值用于传值js，遍历之用。
+
+bindCheckbox: function(e) {
+  var index = parseInt(e.currentTarget.dataset.index);
+  var selected = this.data.carts[index].selected;
+  var carts = this.data.carts;
+var num = parseInt(this.data.carts[index].num); 
+var price=this.data.carts[index].price; 
+if(!selected){
+this.setData({
+count:this.data.count+ num*price,
+number:num+this.data.number
+
+});
+}else{
+this.setData({
+count:this.data.count- num*price,
+number:this.data.number-num
+
+});
+}
+
+  carts[index].selected = !selected;
+ 
+  this.setData({
+    carts: carts
+  });
+},
+
+全选与全不选事件
+
+实现bindSelectAll事件，改变全选状态
+
+首先定义一个data值，以记录全选状态
+
+selectedAllStatus: false
+
+事件实现：
+
+bindSelectAll: function() {
+var selectedAllStatus = this.data.selectedAllStatus;
+selectedAllStatus = !selectedAllStatus;
+var carts = this.data.carts;
+if(!selectedAllStatus){
+for (var i = 0; i < carts.length; i++) {
+carts[i].selected = selectedAllStatus;
+var num = parseInt(this.data.carts[i].num); 
+var price=parseInt(this.data.carts[i].price); 
+this.setData({
+count:this.data.count-num*price,
+number:this.data.number-num
+
+});
+}
+}
