@@ -499,3 +499,121 @@ number:this.data.number-num
 });
 }
 }
+
+
+////////////////////////////////////////////////////////////////////////////////
+小程序-之全选和反选
+##在小程序中有时会遇到全选和反选 全选较为常见,而反选就不常见.
+
+之前用checkbox-group,包围 住checkbox,导致反选和全选 总是有点问题,于是便舍弃了checkbox-group.
+
+ 
+//简化版正选反选
+<view class="list-control">
+　　<view class="fl" @tap="selAll">全选</view>
+　　<view class="fl" @tap="selReverse">反选</view>
+</view>
+<view class="weui-cells color-333">
+　　<block wx:for="{{list}}" wx:key="id">
+　　　　<view class="weui-cell" hover-class="weui-cell_active" @tap="toggle({{index}})">
+　　　　　　<view class="weui-cell__hd" style="width:2.4em;">
+　　　　　　　　<checkbox checked="{{item.checked}}"/>
+　　　　　　</view>
+　　　　　　<view class="weui-cell__bd">
+　　　　　　{{item.name}}
+　　　　　　</view>
+　　　　</view>
+　　</block>
+</view>
+ 
+data = {
+　　count:''//总体数目
+　　selectCount : ''//选择数目
+}
+ 
+//全择全部
+selAll () {
+　　this.list.forEach(one => {
+　　one.checked = !0
+　　})
+　　this.selectCount = this.count
+},
+ 
+//反选
+selReverse () {
+　　this.list.forEach(one => {
+　　one.checked = !one.checked
+　　})
+　　this.selectCount = this.count - this.selectCount
+}
+
+小程序账号：epica2018@163.com   密码：dg12345.
+mysql:qiangshenghulian    qshl19284762
+appid: wx6a2deaf2f93d1ce2   
+secret: de12b552800b5bcf74e7107934508df9
+
+小程序请求路径：https://www.dingguangroup.com/test/qiangshenghulian
+api路径：http://120.79.9.157:8080/qiangshenghulian/swagger-ui.html
+本地api路径：http://192.168.130:8081/swagger-ui.html
+
+
+货到付款是自己安排配送，线下给钱。邮寄是到付，只能是在线支付。
+在线支付下单之后放在待支付，只有一个联系客服按钮，点击进入微信客服，客服给用户扫码支付（与我们无关）。然后客服在后台设置订单为已支付。
+5种货到付款的配送方式：1.普通配送，2.免费配送（3台起送，限下午1点前）。3.快单：深圳全市3-5小时送达。4.加急：深圳全市2小时内送达。5.加急（极速）:40-70分钟。(有地区限制,按距离收费）;
+第一次下单不管是货到付款还是在线支付都要先完善个人信息的基本信息，如果要货到付款还得完善详细信息。
+添加基本信息时要添加地址（一个或多个）,这个地址在提交之后不能修改（只能设置是否默认）,只能联系客服修改。
+管理员审核地址时，通过审核时要给每个地址的设置相应的配送方式和费用。管理员审核基本信息和详细信息时，不过审时可以反馈一条信息，然后让其修改审核信息。
+1点之前可以选择免费配送。9点之后只会提示隔天配送，加急的第二天仍按加急配送。
+下单需要用户姓名、电话、地址信息审核。如果是货到付款则需要审核身份、门店信息.
+用户可以添加多个地址。每个地址在审核时管理员会为其选择可选的配送方式（checkbox）和配送价格。如果没有选择配送方式，则只能邮寄。
+
+
+
+导航栏第二栏里是用来抢折扣券和优惠券的。
+折扣券就是针对运费，优惠券就针对满减
+
+
+双方都可以确认收货
+
+
+
+
+审核信息请求
+    // var info={
+    //   openid:"qubeley",
+    //   name:"李荣宗",
+    //   phone:"15112341234"
+    // }
+    // var address1={
+    //   openid:"qubeley",
+    //   name:"李荣宗1"
+    // }
+    // var address2 = {
+    //   openid: "qubeley",
+    //   name: "李荣宗2",
+    // }
+    // var address = [address1,address2];
+    //   var data={
+    //      "info":JSON.stringify(info),
+    //      "address":JSON.stringify(address)
+    //   }
+    // var data={
+    //   "info":info,
+    //   "address":address
+    // }
+
+  
+    wx.request({
+      url: this.globalData.ctx+"/UserInfo/base",
+      method:"post",
+      data:JSON.stringify(data),
+      header:{
+        // "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type":"application/json",
+        "Authorization": "w8djhjq7vbugbvhvxkzb"                                     //token参数
+      },
+      success:res=>{
+        console.log(res);
+      }
+    })
+    
