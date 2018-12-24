@@ -625,3 +625,7 @@ api路径：http://120.79.9.157:8080/qiangshenghulian/swagger-ui.html
     微信小程序，首页弹出框渲染完成。出现了下面一些错误，有工具第一句话（../utils.js）没有引入，
     导致出现typeerror错误，提示说明了that.gets is not function ,第一次解决是陈巧把后面的cb2换为function但是，还是报同样的错误，
     后来发现有引入文件，所以发现var that=this,上面少些一句引入工具（../utils.js)
+
+  
+
+    // pages/wode/orderStatus/orderStatus.js
